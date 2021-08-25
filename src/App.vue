@@ -1,5 +1,13 @@
 <template>
   <div id="app">
+    <div class="note" v-if="noteShowen">
+      <div>
+        Note that this is still a work in progress, some features are still not
+        implemented, and there is still a lot of bugs, if you want to
+        contribute, <a href="https://github.com/saeedvw/hextacy">click here</a>
+      </div>
+      <span class="close" @click="noteShowen = false">X</span>
+    </div>
     <div class="navbar">
       <input @change="fileOnChange" ref="file_input" type="file" hidden />
       <div class="navbar_logo">
@@ -33,6 +41,11 @@
 import { mapActions, mapMutations } from "vuex";
 export default {
   name: "App",
+  data() {
+    return {
+      noteShowen: true,
+    };
+  },
   methods: {
     ...mapMutations(["addArrayBuffer", "addDataView", "addFilename"]),
     ...mapActions(["saveFile"]),
@@ -111,5 +124,23 @@ body {
 }
 .logo {
   height: 50px;
+}
+.note {
+  background-color: #e8cc43;
+  color: black;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.note > div > a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+.close {
+  cursor: pointer;
 }
 </style>
